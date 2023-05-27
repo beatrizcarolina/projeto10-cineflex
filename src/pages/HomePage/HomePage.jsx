@@ -1,26 +1,28 @@
 import styled from "styled-components"
+import React from "react"
+import axios from "axios"
+import Movies from "../../components/Movies"
 
 export default function HomePage() {
+    axios.defaults.headers.common["Authorization"] = "UbOEf3VmOg23FasMSQimhnYn";
+    const [movies, setMovies] = React.useState([]);
+
+    React.useEffect(() => {
+		axios
+            .get("https://mock-api.driven.com.br/api/v8/cineflex/movies")
+            .then(response => {setMovies(response.data)})
+            .catch((error) => console.log(error));
+	}, []);
+
+
     return (
         <PageContainer>
             Selecione o filme
 
             <ListContainer>
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
-
-                <MovieContainer>
-                    <img src={"https://br.web.img2.acsta.net/pictures/22/05/16/17/59/5165498.jpg"} alt="poster"/>
-                </MovieContainer>
+                {movies.map((movie, index) => (
+                            <Movies key={index} movie={movie}></Movies>
+                    ))}
             </ListContainer>
 
         </PageContainer>
@@ -44,18 +46,4 @@ const ListContainer = styled.div`
     flex-wrap: wrap;
     flex-direction: row;
     padding: 10px;
-`
-const MovieContainer = styled.div`
-    width: 145px;
-    height: 210px;
-    box-shadow: 0px 2px 4px 2px #0000001A;
-    border-radius: 3px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 10px;
-    img {
-        width: 130px;
-        height: 190px;
-    }
 `
