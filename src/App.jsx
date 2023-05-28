@@ -1,18 +1,23 @@
 import styled from "styled-components"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import React from "react";
 import HomePage from "./pages/HomePage/HomePage"
 import SeatsPage from "./pages/SeatsPage/SeatsPage"
 import SessionsPage from "./pages/SessionsPage/SessionsPage"
 import SuccessPage from "./pages/SuccessPage/SuccessPage"
 
 export default function App() {
+    axios.defaults.headers.common["Authorization"] = "UbOEf3VmOg23FasMSQimhnYn";
+    const [order, setOrder] = React.useState({});
+
     return (
         <BrowserRouter>
            <NavContainer>CINEFLEX</NavContainer>
            <Routes>
                 <Route path="/" element={<HomePage />} />
-                <Route path="/sessoes/:idMovie" element={<SessionsPage />} />
-                {/* <SeatsPage /> */}
+                <Route path="/sessoes/:idMovie" element={<SessionsPage setOrder={setOrder} />} />
+                <Route path="/assentos/:idSession" element={<SeatsPage />} />
                 {/* <SuccessPage /> */}
            </Routes>
         </BrowserRouter>
