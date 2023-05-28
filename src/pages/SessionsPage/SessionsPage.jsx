@@ -6,7 +6,6 @@ import Sessions from "../../components/Sessions";
 
 export default function SessionsPage() {
     const { idMovie } = useParams();
-    axios.defaults.headers.common["Authorization"] = "UbOEf3VmOg23FasMSQimhnYn";
     const [movie, setMovie] = React.useState({days: []});
 
     React.useEffect(() => {
