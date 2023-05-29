@@ -1,32 +1,42 @@
 import styled from "styled-components"
+import { useNavigate } from "react-router-dom";
 
-export default function SuccessPage() {
+export default function SuccessPage({order, setOrder}) {
+    const navigate = useNavigate();
+
+    function formatCPF(value) {
+        const Cpf = value.replace(/\D/g, '');
+        
+        if (Cpf.length === 11) {
+            return Cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "\$1.\$2.\$3-\$4");
+        } 
+    }
 
     return (
         <PageContainer>
-            <h1>Pedido feito <br /> com sucesso!</h1>
+        <h1>Pedido feito <br /> com sucesso!</h1>
 
-            <TextContainer>
-                <strong><p>Filme e sessão</p></strong>
-                <p>Tudo em todo lugar ao mesmo tempo</p>
-                <p>03/03/2023 - 14:00</p>
-            </TextContainer>
+        <TextContainer>
+            <strong><p>Filme e sessão</p></strong>
+            <p>{order.session.movie.title}</p>
+            <p>{order.session.day.date} - {order.session.name}</p>
+        </TextContainer>
 
-            <TextContainer>
-                <strong><p>Ingressos</p></strong>
-                <p>Assento 01</p>
-                <p>Assento 02</p>
-                <p>Assento 03</p>
-            </TextContainer>
+        <TextContainer>
+            <strong><p>Ingressos</p></strong>
+            {order.seats.map((seat, index) => (
+                <p key={index}>Assento {seat}</p>
+            ))}
+        </TextContainer>
 
-            <TextContainer>
-                <strong><p>Comprador</p></strong>
-                <p>Nome: Letícia Chijo</p>
-                <p>CPF: 123.456.789-10</p>
-            </TextContainer>
+        <TextContainer>
+            <strong><p>Comprador</p></strong>
+            <p>Nome: {order.name}</p>
+            <p>CPF: {formatCPF(order.cpf)}</p>
+        </TextContainer>
 
-            <button>Voltar para Home</button>
-        </PageContainer>
+        <button onClick={() => {setOrder({}); navigate("/")}}>Voltar para Home</button>
+    </PageContainer>
     )
 }
 
