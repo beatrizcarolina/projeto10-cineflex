@@ -18,7 +18,7 @@ export default function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/sessoes/:idMovie" element={<SessionsPage />} />
                 <Route path="/assentos/:idSession" element={<SeatsPage setOrder={setOrder} />} />
-                <Route path="/success" element={<SuccessPage order={order} setOrder={setOrder}/>} />
+                <Route path="/successo" element={<SuccessPage order={order} setOrder={setOrder}/>} />
            </Routes>
         </BrowserRouter>
     )

@@ -3,6 +3,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import Sessions from "../../components/Sessions";
+import Footer from "../../components/Footer"
 
 export default function SessionsPage() {
     const { idMovie } = useParams();
@@ -25,14 +26,7 @@ export default function SessionsPage() {
                     ))}   
             </div>
 
-            <FooterContainer>
-                <div>
-                    <img src={movie.posterURL} alt={movie.title} />
-                </div>
-                <div>
-                    <p>{movie.title}</p>
-                </div>
-            </FooterContainer>
+            <Footer movie={movie}></Footer>
 
         </PageContainer>
     )

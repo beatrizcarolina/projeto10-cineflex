@@ -11,10 +11,10 @@ export default function Form({selectedSeats, selectedSession, setOrder}) {
 
     function buy(event) {
         event.preventDefault();
-        const data = {ids: selectedSeats, name: name, cpf: CPF};
+        const data = {ids: selectedSeats.ids, name: name, cpf: CPF};
         axios  
         .post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", data)
-        .then(() => {setOrder({name: name, cpf: CPF, seats: selectedSeats.names, session: selectedSession}); navigate("/success")})
+        .then(() => {setOrder({name: name, cpf: CPF, seats: selectedSeats.names, session: selectedSession}); navigate("/successo")})
         .catch((error) => console.log(error));
 
     }
