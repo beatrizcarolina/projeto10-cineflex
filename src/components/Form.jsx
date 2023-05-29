@@ -1,22 +1,20 @@
 import styled from "styled-components";
 import React from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 
 export default function Form({selectedSeats, selectedSession, setOrder}) {
     const [name, setName] = React.useState("");
     const [CPF, setCPF] = React.useState("");
+    const navigate = useNavigate();
 
     function buy(event) {
         event.preventDefault();
-        const data = {
-            ids: selectedSeats,
-            name: name,
-            cpf: CPF
-        };
+        const data = {ids: selectedSeats, name: name, cpf: CPF};
         axios  
         .post("https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many", data)
-        .then(() => setOrder({name: name, cpf: CPF, seats: selectedSeats.names, session: selectedSession}))
+        .then(() => {setOrder({name: name, cpf: CPF, seats: selectedSeats.names, session: selectedSession}); navigate("/success")})
         .catch((error) => console.log(error));
 
     }
