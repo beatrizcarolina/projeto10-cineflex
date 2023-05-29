@@ -18,7 +18,7 @@ export default function HomePage() {
         <PageContainer>
             Selecione o filme
 
-            <ListContainer data-test="movie">
+            <ListContainer>
                 {movies.map((movie, index) => (
                             <Movies key={index} movie={movie}></Movies>
                     ))}
