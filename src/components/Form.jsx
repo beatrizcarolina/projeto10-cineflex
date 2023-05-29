@@ -29,7 +29,7 @@ export default function Form({selectedSeats, selectedSession, setOrder}) {
                     required 
                     onChange={(event) => setName(event.target.value)}
                     value={name}
-                    
+                    data-test="client-name"
                 />
 
                 CPF do Comprador:
@@ -42,10 +42,10 @@ export default function Form({selectedSeats, selectedSession, setOrder}) {
                     required
                     onChange={(event) => setCPF(event.target.value)}
                     value={CPF}
-                    
+                    data-test="client-cpf"
                 />
 
-                <button type="submit" >Reservar Assento(s)</button>
+                <button type="submit" data-test="book-seat-btn">Reservar assento(s)</button>
             </form>
             </FormContainer>
     )

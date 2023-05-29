@@ -16,26 +16,26 @@ export default function SuccessPage({order, setOrder}) {
         <PageContainer>
         <h1>Pedido feito <br /> com sucesso!</h1>
 
-        <TextContainer>
+        <TextContainer data-test="movie-info">
             <strong><p>Filme e sessão</p></strong>
             <p>{order.session.movie.title}</p>
             <p>{order.session.day.date} - {order.session.name}</p>
         </TextContainer>
 
-        <TextContainer>
+        <TextContainer data-test="seats-info">
             <strong><p>Ingressos</p></strong>
             {order.seats.map((seat, index) => (
                 <p key={index}>Assento {seat}</p>
             ))}
         </TextContainer>
 
-        <TextContainer>
+        <TextContainer data-test="client-info">
             <strong><p>Comprador</p></strong>
             <p>Nome: {order.name}</p>
             <p>CPF: {formatCPF(order.cpf)}</p>
         </TextContainer>
 
-        <button onClick={() => {setOrder({}); navigate("/")}}>Voltar para Home</button>
+        <button onClick={() => {setOrder({}); navigate("/")}} data-test="go-home-btn">Voltar para Home</button>
     </PageContainer>
     )
 }
